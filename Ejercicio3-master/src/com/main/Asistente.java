@@ -2,6 +2,10 @@ package com.main;
 
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 
 public class Asistente {
@@ -37,9 +41,12 @@ public class Asistente {
 		case 3: strOut= fasist.darFecha();break;
 		case 4: strOut= fasist.darDiaSemana();break;
 		case 5: strOut= fasist.darDiaFueSera(cmdmsg.getStdStrIn());break;
-		
-
-		
+		case 6: strOut= fasist.tiempoDiasDesdeFecha(cmdmsg.getStdStrIn());break;
+		case 7: strOut= fasist.tiempoMesesDesdeFecha(cmdmsg.getStdStrIn());break;
+		case 8: strOut= fasist.tiempoAniosDesdeFecha(cmdmsg.getStdStrIn());break;
+		case 9: strOut= fasist.tiempoAniosHastaFecha(cmdmsg.getStdStrIn());break;
+		case 10: strOut= fasist.tiempoDiasHastaFecha(cmdmsg.getStdStrIn());break;
+		case 11: strOut= fasist.tiempoMesesHastaFecha(cmdmsg.getStdStrIn());break;
 		
 		default: strOut=msjNoDetectado();
 		}
@@ -47,100 +54,10 @@ public class Asistente {
 		return strOut;
 		
 	}
-	
-	
-	
-	
-	
-	
-	
+		
 	private static String msjNoDetectado() {
 		return "Disculpa... no entiendo el pedido, ¿podrías repetirlo?";
 	}
-
-	
-	
-	
-	
-
-	
-	
-
-	/* 
-	 * estos 3 metodos siguientes funcionan, los comento porque no tengo test 
-	 * 
-	 
-	
-	
-	static public String tiempoDiasDesdeFecha(String strIn) throws ParseException {
-		
-		SimpleDateFormat formatIn = new SimpleDateFormat("'cuántos días pasaron desde el' dd 'de' MMMMM 'de' yyyy");
-		SimpleDateFormat formatOut = new SimpleDateFormat("dd 'de' MMMMM 'de' yyyy");
-
-		//String strIn = "cuántos días pasaron desde el 1 de abril de 2018";
-
-		Date fechaStrIn = formatIn.parse(strIn);
-		
-		Calendar desde = new GregorianCalendar();
-		Calendar hasta = new GregorianCalendar();
-		
-		desde.setTime(fechaStrIn);
-		hasta.setTime(new Date());
-		
-		long dias = (hasta.getTimeInMillis() - desde.getTimeInMillis())/ (24 * 60 * 60 * 1000);
-		
-		return ("Entre el "+ formatOut.format(fechaStrIn) + " y hoy pasaron "  + dias + " dias");
-		
-	}
-	
-	static public String tiempoMesesDesdeFecha(String strIn) throws ParseException {
-		
-		SimpleDateFormat formatIn = new SimpleDateFormat("'cuántos meses pasaron desde el' dd 'de' MMMMM 'de' yyyy");
-		SimpleDateFormat formatOut = new SimpleDateFormat("dd 'de' MMMMM 'de' yyyy");
-
-		//String strIn = "cuántos días pasaron desde el 1 de abril de 2018";
-
-		Date fechaStrIn = formatIn.parse(strIn);
-		
-		Calendar desde = new GregorianCalendar();
-		Calendar hasta = new GregorianCalendar();
-		
-		desde.setTime(fechaStrIn);
-		hasta.setTime(new Date());
-		
-		int anios = hasta.get(Calendar.YEAR) - desde.get(Calendar.YEAR);
-		int meses = hasta.get(Calendar.MONTH) - desde.get(Calendar.MONTH);
-		int totalMeses = anios*12 + meses;
-		 
-		return ("Entre el "+ formatOut.format(fechaStrIn) + " y hoy pasaron "  + totalMeses + " meses");
-		
-	}
-	
-	
-	static public String tiempoAniosDesdeFecha(String strIn) throws ParseException {
-		
-		SimpleDateFormat formatIn = new SimpleDateFormat("'cuántos años pasaron desde el' dd 'de' MMMMM 'de' yyyy");
-		SimpleDateFormat formatOut = new SimpleDateFormat("dd 'de' MMMMM 'de' yyyy");
-
-		//String strIn = "cuántos días pasaron desde el 1 de abril de 2018";
-
-		Date fechaStrIn = formatIn.parse(strIn);
-		
-		Calendar desde = new GregorianCalendar();
-		Calendar hasta = new GregorianCalendar();
-		
-		desde.setTime(fechaStrIn);
-		hasta.setTime(new Date());
-		
-		int anios = hasta.get(Calendar.YEAR) - desde.get(Calendar.YEAR);
-		 
-		return ("Entre el "+ formatOut.format(fechaStrIn) + " y hoy pasaron "  + anios + " años");
-		
-	}
-	
-	
-	*/
-	
 	
 	
 }

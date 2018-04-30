@@ -1,7 +1,9 @@
 package com.main;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.regex.Matcher;
@@ -122,7 +124,151 @@ public class FechasAsistente {
 		else
 			return -1;
 	}
+	public String tiempoDiasDesdeFecha(String strIn) throws ParseException {
+		
+		SimpleDateFormat formatIn = new SimpleDateFormat("'cuantos dias pasaron desde el' dd 'de' MMMMM 'de' yyyy");
+		SimpleDateFormat formatOut = new SimpleDateFormat("dd 'de' MMMMM 'de' yyyy");
 
+		//String strIn = "cuántos días pasaron desde el 1 de abril de 2018";
+
+		Date fechaStrIn = formatIn.parse(strIn);
+		
+		Calendar desde = new GregorianCalendar();
+		Calendar hasta = new GregorianCalendar();
+		
+		desde.setTime(fechaStrIn);
+		hasta.setTime(new Date());
+		
+		long dias = (hasta.getTimeInMillis() - desde.getTimeInMillis())/ (24 * 60 * 60 * 1000);
+		
+		return ("Entre el "+ formatOut.format(fechaStrIn) + " y hoy pasaron "  + dias + " dias");
+		
+	}
+	
+	 public String tiempoMesesDesdeFecha(String strIn) throws ParseException {
+		
+		SimpleDateFormat formatIn = new SimpleDateFormat("'cuantos meses pasaron desde el' dd 'de' MMMMM 'de' yyyy");
+		SimpleDateFormat formatOut = new SimpleDateFormat("dd 'de' MMMMM 'de' yyyy");
+
+		//String strIn = "cuántos días pasaron desde el 1 de abril de 2018";
+
+		Date fechaStrIn = formatIn.parse(strIn);
+		
+		Calendar desde = new GregorianCalendar();
+		Calendar hasta = new GregorianCalendar();
+		
+		desde.setTime(fechaStrIn);
+		hasta.setTime(new Date());
+		
+		int anios = hasta.get(Calendar.YEAR) - desde.get(Calendar.YEAR);
+		int meses = hasta.get(Calendar.MONTH) - desde.get(Calendar.MONTH);
+		int totalMeses = anios*12 + meses;
+		 
+		return ("Entre el "+ formatOut.format(fechaStrIn) + " y hoy pasaron "  + totalMeses + " meses");
+		
+	}
+		 public String tiempoAniosDesdeFecha(String strIn) throws ParseException {
+			
+			SimpleDateFormat formatIn = new SimpleDateFormat("'cuantos años pasaron desde el' dd 'de' MMMMM 'de' yyyy");
+			SimpleDateFormat formatOut = new SimpleDateFormat("dd 'de' MMMMM 'de' yyyy");
+
+			//String strIn = "cuántos días pasaron desde el 1 de abril de 2018";
+
+			Date fechaStrIn = formatIn.parse(strIn);
+			
+			Calendar desde = new GregorianCalendar();
+			Calendar hasta = new GregorianCalendar();
+			
+			desde.setTime(fechaStrIn);
+			hasta.setTime(new Date());
+			int anios;
+			if(hasta.get(Calendar.MONTH)>=desde.get(Calendar.MONTH)) {
+					anios = hasta.get(Calendar.YEAR) - desde.get(Calendar.YEAR);	
+			}else {
+				anios = hasta.get(Calendar.YEAR) - desde.get(Calendar.YEAR)- 1;
+			}
+			return ("Entre el "+ formatOut.format(fechaStrIn) + " y hoy pasaron "  + anios + " años");
+			
+		}
+		 public String tiempoAniosHastaFecha(String strIn) throws ParseException {
+				
+				SimpleDateFormat formatIn = new SimpleDateFormat("'cuantos años pasaran hasta el' dd 'de' MMMMM 'de' yyyy");
+				SimpleDateFormat formatOut = new SimpleDateFormat("dd 'de' MMMMM 'de' yyyy");
+
+				//String strIn = "cuántos días pasaron desde el 1 de abril de 2018";
+
+				Date fechaStrIn = formatIn.parse(strIn);
+				
+				Calendar desde = new GregorianCalendar();
+				Calendar hasta = new GregorianCalendar();
+				
+				desde.setTime(new Date());
+				hasta.setTime(fechaStrIn);
+				int anios;
+				if(hasta.get(Calendar.MONTH)>=desde.get(Calendar.MONTH)) {
+						anios = hasta.get(Calendar.YEAR) - desde.get(Calendar.YEAR);	
+				}else {
+					anios = hasta.get(Calendar.YEAR) - desde.get(Calendar.YEAR)- 1;
+				}
+			 
+				return ("Entre hoy y el "+ formatOut.format(fechaStrIn) +" pasaron " + anios + " años");
+				
+			}
+		 
+
+		 
+		 public String tiempoDiasHastaFecha(String strIn) throws ParseException {
+				
+				SimpleDateFormat formatIn = new SimpleDateFormat("'cuantos dias pasaran hasta el' dd 'de' MMMMM 'de' yyyy");
+				SimpleDateFormat formatOut = new SimpleDateFormat("dd 'de' MMMMM 'de' yyyy");
+
+				//String strIn = "cuántos días pasaron desde el 1 de abril de 2018";
+
+				Date fechaStrIn = formatIn.parse(strIn);
+				
+				Calendar desde = new GregorianCalendar();
+				Calendar hasta = new GregorianCalendar();
+				
+				desde.setTime(fechaStrIn);
+				hasta.setTime(new Date());
+				
+				long dias = (hasta.getTimeInMillis() - desde.getTimeInMillis())/ (24 * 60 * 60 * 1000);
+				
+				return ("Entre hoy y el "+ formatOut.format(fechaStrIn) + " pasaran "  + (dias<0?dias*-1:dias) + " dias");
+				
+			}
+			
+			 public String tiempoMesesHastaFecha(String strIn) throws ParseException {
+				
+				SimpleDateFormat formatIn = new SimpleDateFormat("'cuantos meses pasaran hasta el' dd 'de' MMMMM 'de' yyyy");
+				SimpleDateFormat formatOut = new SimpleDateFormat("dd 'de' MMMMM 'de' yyyy");
+
+				//String strIn = "cuántos días pasaron desde el 1 de abril de 2018";
+
+				Date fechaStrIn = formatIn.parse(strIn);
+				
+				Calendar desde = new GregorianCalendar();
+				Calendar hasta = new GregorianCalendar();
+				
+				desde.setTime(new Date());
+				hasta.setTime(fechaStrIn);
+				int anios;
+				if(hasta.get(Calendar.MONTH)>=desde.get(Calendar.MONTH)) {
+					anios = hasta.get(Calendar.YEAR) - desde.get(Calendar.YEAR);	
+				}else {
+					anios = hasta.get(Calendar.YEAR) - desde.get(Calendar.YEAR)- 1;
+				}
+				int meses;
+				if(hasta.get(Calendar.DAY_OF_MONTH)>=desde.get(Calendar.DAY_OF_MONTH)) {
+					meses = hasta.get(Calendar.MONTH) - desde.get(Calendar.MONTH);	
+				}else {
+					meses = hasta.get(Calendar.MONTH) - desde.get(Calendar.MONTH)- 1;
+				}
+			   	int totalMeses = anios*12 + meses;
+				 
+				return ("Entre hoy y el "+ formatOut.format(fechaStrIn) + " pasaran "  + totalMeses + " meses");
+				
+			}
 	private String fechaResultado(int calendarType, int x, int desplazamiento) {
 		fechaPedida.add(calendarType, x * desplazamiento);
 
