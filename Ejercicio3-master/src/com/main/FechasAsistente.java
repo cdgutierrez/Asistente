@@ -110,6 +110,8 @@ public class FechasAsistente {
 		return ("disculpa, no entiendo tu consulta");
 	}
 
+	
+	
 	private int extraerNro(String cadena) {
 
 		StringBuilder str = new StringBuilder();
@@ -124,72 +126,133 @@ public class FechasAsistente {
 		else
 			return -1;
 	}
-	public String tiempoDiasDesdeFecha(String strIn) throws ParseException {
+	
+	
+	
+	
+	
+	
+	public String tiempoDesde(String strIn) throws ParseException {
+	
+	
+	Calendar hasta = new GregorianCalendar();
+	hasta.setTime(new Date());
+	SimpleDateFormat formatOut = new SimpleDateFormat("dd 'de' MMMMM 'de' yyyy");
+	
+	
+	
+	// @grace cuántos días pasaron desde el 1 de abril de 2017?
+	
+	//String strIn = "cuantos años pasaron desde el 23 de enero de 2019?";
+	
+	
+	Pattern regex = Pattern.compile("cuantos dias pasaron desde el (\\d|\\d\\d) de "
+			+ "(enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre) "
+			+ "de (19[\\d]{2}|20[\\d]{2})\\?$");
+	
+	// (19[\\d]{2}|20[\\d]{2}|2100)\\?$"   i.e. desde el año 1900 al 2100.....\\? significa que el ultimo caracter ($) sea un signo '?'
+	
+	Matcher match = regex.matcher(strIn);
+
+	
+	if (match.matches()) {
 		
 		SimpleDateFormat formatIn = new SimpleDateFormat("'cuantos dias pasaron desde el' dd 'de' MMMMM 'de' yyyy");
-		SimpleDateFormat formatOut = new SimpleDateFormat("dd 'de' MMMMM 'de' yyyy");
-
-		//String strIn = "cuántos días pasaron desde el 1 de abril de 2018";
 
 		Date fechaStrIn = formatIn.parse(strIn);
 		
 		Calendar desde = new GregorianCalendar();
-		Calendar hasta = new GregorianCalendar();
-		
 		desde.setTime(fechaStrIn);
-		hasta.setTime(new Date());
 		
 		long dias = (hasta.getTimeInMillis() - desde.getTimeInMillis())/ (24 * 60 * 60 * 1000);
 		
-		return ("Entre el "+ formatOut.format(fechaStrIn) + " y hoy pasaron "  + dias + " dias");
+		if(dias>0) {
+			return(("Entre el "+ formatOut.format(fechaStrIn) + " y hoy pasaron "  + dias + " dias"));
+		}else {
+			return("Hubo un error en el calculo de los dias, verifique que sea una fecha pasada");
+		}
+
 		
 	}
 	
-	 public String tiempoMesesDesdeFecha(String strIn) throws ParseException {
+	regex = Pattern.compile("cuantos meses pasaron desde el (\\d|\\d\\d) de "
+			+ "(enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre) "
+			+ "de (19[\\d]{2}|20[\\d]{2})\\?$");
+	
+	match = regex.matcher(strIn);
+
+	
+	if (match.matches()) {
 		
 		SimpleDateFormat formatIn = new SimpleDateFormat("'cuantos meses pasaron desde el' dd 'de' MMMMM 'de' yyyy");
-		SimpleDateFormat formatOut = new SimpleDateFormat("dd 'de' MMMMM 'de' yyyy");
 
 		//String strIn = "cuántos días pasaron desde el 1 de abril de 2018";
 
 		Date fechaStrIn = formatIn.parse(strIn);
 		
 		Calendar desde = new GregorianCalendar();
-		Calendar hasta = new GregorianCalendar();
 		
 		desde.setTime(fechaStrIn);
-		hasta.setTime(new Date());
+
 		
 		int anios = hasta.get(Calendar.YEAR) - desde.get(Calendar.YEAR);
 		int meses = hasta.get(Calendar.MONTH) - desde.get(Calendar.MONTH);
 		int totalMeses = anios*12 + meses;
 		 
-		return ("Entre el "+ formatOut.format(fechaStrIn) + " y hoy pasaron "  + totalMeses + " meses");
+		if(totalMeses>0) {
+			return(("Entre el "+ formatOut.format(fechaStrIn) + " y hoy pasaron "  + totalMeses + " meses"));
+		}else {
+			return(("Hubo un error en el calculo de los meses, verifique que sea una fecha pasada"));
+		}
+		
+		
 		
 	}
-		 public String tiempoAniosDesdeFecha(String strIn) throws ParseException {
-			
-			SimpleDateFormat formatIn = new SimpleDateFormat("'cuantos años pasaron desde el' dd 'de' MMMMM 'de' yyyy");
-			SimpleDateFormat formatOut = new SimpleDateFormat("dd 'de' MMMMM 'de' yyyy");
+	
+	
+	regex = Pattern.compile("cuantos años pasaron desde el (\\d|\\d\\d) de "
+			+ "(enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre) "
+			+ "de (19[\\d]{2}|20[\\d]{2})\\?$");
+	
+	match = regex.matcher(strIn);
 
-			//String strIn = "cuántos días pasaron desde el 1 de abril de 2018";
+	
+	if (match.matches()) {
+		
 
-			Date fechaStrIn = formatIn.parse(strIn);
-			
-			Calendar desde = new GregorianCalendar();
-			Calendar hasta = new GregorianCalendar();
-			
-			desde.setTime(fechaStrIn);
-			hasta.setTime(new Date());
-			int anios;
-			if(hasta.get(Calendar.MONTH)>=desde.get(Calendar.MONTH)) {
-					anios = hasta.get(Calendar.YEAR) - desde.get(Calendar.YEAR);	
-			}else {
-				anios = hasta.get(Calendar.YEAR) - desde.get(Calendar.YEAR)- 1;
-			}
-			return ("Entre el "+ formatOut.format(fechaStrIn) + " y hoy pasaron "  + anios + " años");
-			
+		SimpleDateFormat formatIn = new SimpleDateFormat("'cuantos años pasaron desde el' dd 'de' MMMMM 'de' yyyy");
+
+		Date fechaStrIn = formatIn.parse(strIn);
+		
+		Calendar desde = new GregorianCalendar();
+
+		
+		desde.setTime(fechaStrIn);
+
+		int anios;
+		if(hasta.get(Calendar.MONTH)>=desde.get(Calendar.MONTH)) {
+				anios = hasta.get(Calendar.YEAR) - desde.get(Calendar.YEAR);	
+		}else {
+			anios = hasta.get(Calendar.YEAR) - desde.get(Calendar.YEAR)- 1;
 		}
+		if(anios>0) {
+			return(("Entre el "+ formatOut.format(fechaStrIn) + " y hoy pasaron "  + anios + " años"));
+		}else {
+			return("Hubo un error en el calculo de los años, verifique que sea una fecha pasada");
+		}
+		
+		
+	}
+	
+	
+	return("disculpe, podria repetir el pedido?");
+	
+}
+		 
+		 
+		 
+		 
+		 
 		 public String tiempoAniosHastaFecha(String strIn) throws ParseException {
 				
 				SimpleDateFormat formatIn = new SimpleDateFormat("'cuantos años pasaran hasta el' dd 'de' MMMMM 'de' yyyy");
@@ -269,6 +332,11 @@ public class FechasAsistente {
 				return ("Entre hoy y el "+ formatOut.format(fechaStrIn) + " pasaran "  + totalMeses + " meses");
 				
 			}
+			 
+			 
+			 
+			 
+			 
 	private String fechaResultado(int calendarType, int x, int desplazamiento) {
 		fechaPedida.add(calendarType, x * desplazamiento);
 

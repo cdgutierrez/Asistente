@@ -41,12 +41,14 @@ public class Asistente {
 		case 3: strOut= fasist.darFecha();break;
 		case 4: strOut= fasist.darDiaSemana();break;
 		case 5: strOut= fasist.darDiaFueSera(cmdmsg.getStdStrIn());break;
-		case 6: strOut= fasist.tiempoDiasDesdeFecha(cmdmsg.getStdStrIn());break;
-		case 7: strOut= fasist.tiempoMesesDesdeFecha(cmdmsg.getStdStrIn());break;
-		case 8: strOut= fasist.tiempoAniosDesdeFecha(cmdmsg.getStdStrIn());break;
-		case 9: strOut= fasist.tiempoAniosHastaFecha(cmdmsg.getStdStrIn());break;
-		case 10: strOut= fasist.tiempoDiasHastaFecha(cmdmsg.getStdStrIn());break;
-		case 11: strOut= fasist.tiempoMesesHastaFecha(cmdmsg.getStdStrIn());break;
+		case 6: strOut= fasist.tiempoDesde(cmdmsg.getStdStrIn());break;
+		
+//		case 7: strOut= fasist.tiempoMesesDesdeFecha(cmdmsg.getStdStrIn());break;
+//		case 8: strOut= fasist.tiempoAniosDesdeFecha(cmdmsg.getStdStrIn());break;
+//		case 9: strOut= fasist.tiempoAniosHastaFecha(cmdmsg.getStdStrIn());break;
+//		case 10: strOut= fasist.tiempoDiasHastaFecha(cmdmsg.getStdStrIn());break;
+//		case 11: strOut= fasist.tiempoMesesHastaFecha(cmdmsg.getStdStrIn());break;
+		
 		
 		default: strOut=msjNoDetectado();
 		}

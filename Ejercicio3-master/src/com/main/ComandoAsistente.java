@@ -68,12 +68,8 @@ public class ComandoAsistente {
 				{"que dia es","la fecha","me decis la fecha"},
 				{"que dia de la semana es hoy"},
 				{"que dia sera","que dia fue"},
-				{"cuantos dias pasaron desde" },
-				{"cuantos meses pasaron desde"},
-				{"cuantos años pasaron desde"},
-				{"cuantos años pasaran hasta"},
-				{"cuantos dias pasaran hasta" },
-				{"cuantos meses pasaran hasta"},
+				{"cuantos dias pasaron desde","cuantos meses pasaron desde","cuantos años pasaron desde" },
+
 
 		};
 		
